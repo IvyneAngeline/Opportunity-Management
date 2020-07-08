@@ -19,7 +19,7 @@
        <a href="{{route('post.create')}}" class="btn btn-primary">Create</a>
         <div class="posting">
             @foreach($posts as $post)
-                <div class="card">
+                <div class="card" id="all_post" v-on:click="greet">
                     <div class="card-header row col-lg-10" style="padding-left: 30px">
                         <div style="-moz-border-radius: 50px;
                         -webkit-border-radius: 60px;width: 50px;height: 50px;
@@ -30,9 +30,10 @@
                     </div>
                     <div class="card-body" style="padding: 20px">
                         <p class="card-title" style="font-weight: bold" >{{$post->title}}</p>
-                        <p class="card-text">{{$post->description}}</p>
+                        <p class="card-text">
+                            {{\Illuminate\Support\Str::limit($post->description,200,$end=' ...')}}</p>
                         @if($post->asset !=null)
-                            <a  href="{{asset('images/'.$post->asset)}}">Download attachemnt</a>
+                            <a  href="{{asset('images/'.$post->asset)}}">Download Attachment</a>
                         @endif
 
                     </div>
@@ -59,6 +60,7 @@
                             {{$post->comments}}
                         </div>
 
+
                     </div>
                 </div>
 
@@ -66,5 +68,7 @@
 
         </div>
     </div>
+
+
 
 @endsection

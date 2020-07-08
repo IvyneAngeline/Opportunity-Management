@@ -35,6 +35,10 @@ class PostController extends Controller
 
     public  function  download(){
 
+        DB::table('posts')->increment('download');
+
+        return redirect()->route('post.index');
+
     }
 
     /**
