@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->integer('downloads')->default(0);
             $table->string('category');
             $table->integer('views')->default(0);
-            $table->integer('user_id')->foreign('id')->on('users')->cascade();
+            $table->integer('user_id')->foreign('id')->on('users')->onDelete('cascade');
             $table->integer('comments')->default(0);
             $table->timestamps();
         });

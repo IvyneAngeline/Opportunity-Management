@@ -25,6 +25,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
     Route::post('activate/{id}','UserController@activate')->name('activate');
     Route::post('suspend/{id}','UserController@suspend')->name('suspend');
+    Route::post('comment','CommentsController@store')->name('comment');
+    Route::post('download','PostController@download')->name('download');
+
     Route::get('admin','UserController@admin')->name('admin');
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::resource('post','PostController');

@@ -12,4 +12,13 @@ class Posts extends Model
         // your other new column
     ];
     protected  $fillable=['title','description','asset','likes','downloads','category','user_id','comments'];
+
+
+    public  function user(){
+        return $this->belongsTo('App\User');
+    }
+    public  function  comment(){
+        return $this->hasMany('App\Comments');
+    }
+
 }

@@ -19,21 +19,23 @@
        <a href="{{route('post.create')}}" class="btn btn-primary">Create</a>
         <div class="posting">
             @foreach($posts as $post)
-                <div class="card" id="all_post" v-on:click="greet">
+
+                <div class="card">
                     <div class="card-header row col-lg-10" style="padding-left: 30px">
                         <div style="-moz-border-radius: 50px;
                         -webkit-border-radius: 60px;width: 50px;height: 50px;
                          border-radius: 50px;background-color: lightgrey"></div>
                          <span style="width: 20px"></span>
-                        <p class="card-title" style="text-align: center">{{$post->name}}</p>
+                        <p class="card-title" style="text-align: center">{{$post->user_name}}</p>
 
                     </div>
                     <div class="card-body" style="padding: 20px">
-                        <p class="card-title" style="font-weight: bold" >{{$post->title}}</p>
+                        <h6 class="card-title" style="font-weight: bold;color: black" >{{$post->title}}</h6>
                         <p class="card-text">
-                            {{\Illuminate\Support\Str::limit($post->description,200,$end=' ...')}}</p>
+                            {{\Illuminate\Support\Str::limit($post->description,200,$end=' ...')}}
+                            <span><a href="{{route('post.show',$post->post_id)}}">Read More</a></span></p>
                         @if($post->asset !=null)
-                            <a  href="{{asset('images/'.$post->asset)}}">Download Attachment</a>
+                            <a  href="images/{{$post->asset}}">Download Attachment</a>
                         @endif
 
                     </div>

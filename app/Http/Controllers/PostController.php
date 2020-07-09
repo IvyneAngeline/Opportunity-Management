@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Comments;
 use App\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,15 @@ class PostController extends Controller
     {
        $posts=DB::table('posts')
            ->join('users','posts.user_id',
-               '=','users.id')->orderBy('posts.created_at','desc')->get();
+               '=','users.id')
+           ->select('users.name as user_name',
+           'users.id as user_id','posts.title as title',
+               'posts.description as description',
+               'posts.id as post_id',
+               'posts.asset as asset',
+           'posts.created_at as created_at','posts.likes as likes',
+               'posts.downloads as downloads','posts.comments as comments')
+           ->orderBy('posts.created_at','desc')->get();
 
        return  view('posts.index',compact('posts'));
     }
@@ -33,10 +42,8 @@ class PostController extends Controller
         return  view('posts.create');
     }
 
-    public  function  download(){
-
-        DB::table('posts')->increment('download');
-
+    public  function  download($name){
+        return response()->download(public_path('images/'.$name));
         return redirect()->route('post.index');
 
     }
@@ -96,8 +103,26 @@ class PostController extends Controller
      */
     public function show($id)
     {
-        $post=Posts::find($id);
-        return view('posts.show',compact('post'));
+        $comments=DB::table('comments')
+            ->join('users','comments.user_id','users.id')
+        ->select('comments.id as comment_id','comments.post_id as comment_post_id'
+        ,'comments.user_id as comments_user_id','comments.created_at as commented_at'
+        ,'comments.comment as actual_comment','users.name as comment_name')
+        ->where('post_id','=',$id)->get();
+        Posts::find($id)->increment('views');
+        $post=DB::table('posts')
+            ->join('users','posts.user_id',
+                '=','users.id')
+            ->select('users.name as user_name',
+                'users.id as user_id','posts.title as title',
+                'posts.description as description',
+                'posts.id as post_id',
+                'posts.asset as asset',
+                'posts.created_at as created_at','posts.likes as likes',
+                'posts.downloads as downloads','posts.comments as comments')
+            ->where('posts.id','=',$id)->first();
+
+        return view('posts.show',compact('post'),compact('comments'));
     }
 
     /**
