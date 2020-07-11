@@ -27,11 +27,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('suspend/{id}','UserController@suspend')->name('suspend');
     Route::post('comment','CommentsController@store')->name('comment');
     Route::post('download','PostController@download')->name('download');
+    Route::get('category_chart','PostController@category')->name('category_chart');
 
     Route::get('admin','UserController@admin')->name('admin');
     Route::resource('user', 'UserController', ['except' => ['show']]);
     Route::resource('post','PostController');
-	Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
+    Route::resource('category','CategoryController');
+    Route::get('profile', ['as' => 'profile.edit', 'uses' => 'ProfileController@edit']);
 	Route::put('profile', ['as' => 'profile.update', 'uses' => 'ProfileController@update']);
 	Route::put('profile/password', ['as' => 'profile.password', 'uses' => 'ProfileController@password']);
 });

@@ -41,6 +41,15 @@
                     <p>{{ __('Resources') }}</p>
                 </a>
             </li>
+            <li class="{{ $elementActive == 'category' ? 'active' : '' }}">
+                @if(\Illuminate\Support\Facades\Auth::user()->account_type=="admin")
+                    <a href="{{ route('category.index', 'category') }}">
+                        <i class="nc-icon nc-circle-10"></i>
+                        <p>{{ __('Categories') }}</p>
+                    </a>
+                @endif
+            </li>
+
 
         </ul>
     </div>

@@ -56,8 +56,10 @@ The above copyright notice and this permission notice shall be included in all c
     <meta property="fb:app_id" content="655968634437471">
     <meta property="og:title" content="Paper Dashboard Laravel by Creative Tim" />
     <meta property="og:type" content="article" />
-    <meta property="og:url" content="https://www.creative-tim.com/live/paper-dashboard-laravel" />
-    <meta property="og:image" content="https://s3.amazonaws.com/creativetim_bucket/products/209/opt_pd_laravel_thumbnail.jpg"/>
+    <meta property="og:url"
+          content="https://www.creative-tim.com/live/paper-dashboard-laravel" />
+    <meta property="og:image"
+          content="https://s3.amazonaws.com/creativetim_bucket/products/209/opt_pd_laravel_thumbnail.jpg"/>
     <meta property="og:description" content="Start your development with a Bootstrap 4 Admin Dashboard built for Laravel Framework 5.5 and Up." />
     <meta property="og:site_name" content="Creative Tim" />
 
@@ -67,7 +69,8 @@ The above copyright notice and this permission notice shall be included in all c
     <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
         name='viewport' />
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
+          rel="stylesheet" />
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" rel="stylesheet">
     <!-- CSS Files -->
     <link href="{{ asset('paper') }}/css/bootstrap.min.css" rel="stylesheet" />

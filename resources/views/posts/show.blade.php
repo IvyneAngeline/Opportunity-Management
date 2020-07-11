@@ -50,6 +50,8 @@
                         <p class="card-title"
                            style="">{{$comment->comment_name}}</p>
                         <p>{{$comment->actual_comment}}</p>
+                            <hr style="opacity: 0.6">
+
                         </div>
 
                         <span style="width: 10px"></span>

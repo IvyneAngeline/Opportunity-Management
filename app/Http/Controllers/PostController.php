@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Comments;
 use App\Posts;
 use Illuminate\Http\Request;
@@ -15,9 +16,29 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public  function  category(){
+
+
+        $categories = DB::table('posts')
+            ->join('categories', 'categories.id',
+                '=', 'posts.category')
+            ->select('categories.name', DB::raw('COUNT(*) AS total'))
+            ->groupBy('categories.name')
+            ->get();
+
+        return  response()->json($categories);
+
+    }
     public function index()
     {
-       $posts=DB::table('posts')
+        $post_count=DB::table('posts')
+            ->distinct()->count('id');
+        $users=DB::table('posts')->distinct()->count('user_id');
+        $views=DB::table('posts')->sum('views');
+
+
+        $posts=DB::table('posts')
            ->join('users','posts.user_id',
                '=','users.id')
            ->select('users.name as user_name',
@@ -29,7 +50,8 @@ class PostController extends Controller
                'posts.downloads as downloads','posts.comments as comments')
            ->orderBy('posts.created_at','desc')->get();
 
-       return  view('posts.index',compact('posts'));
+       return  view('posts.index',
+           compact('posts'))->with('users',$users)->with('views',$views)->with('post_count',$post_count);
     }
 
     /**
@@ -39,7 +61,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return  view('posts.create');
+        $categories=Category::all();
+        return  view('posts.create',compact('categories'));
     }
 
     public  function  download($name){
