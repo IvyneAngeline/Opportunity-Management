@@ -85,7 +85,7 @@
                                     <button
                                         class=
                                         "btn  btn-outline-info">
-                                        <a href="{{route('manage')}}">Manage</a></button>
+                                        <a href="{{route('stats')}}">Manage</a></button>
 
                                 </div>
                             </div>
@@ -110,7 +110,7 @@
                                 <div class="col-7 col-md-8">
                                     <div class="numbers">
                                         <p class="card-category">Total Users</p>
-                                        <p class="card-title">{{$users}}
+                                        <p class="card-title">{{$errors}}
                                         <p>
                                     </div>
                                 </div>

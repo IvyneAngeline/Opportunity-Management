@@ -17,6 +17,19 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public  function  views_stats(){
+
+    }
+
+    public  function  stats(){
+        $comments = DB::table('comments')
+            ->select('comments.created_at as comment_days'
+                , DB::raw('COUNT(*) AS total'))
+            ->groupBy('comments.created_at')
+            ->get();
+
+        return  view('posts.stats')->with('comments',$comments);
+    }
     public  function  category(){
 
 
