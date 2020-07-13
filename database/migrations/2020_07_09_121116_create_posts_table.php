@@ -24,9 +24,11 @@ class CreatePostsTable extends Migration
             $table->integer('views')->default(0);
             $table->integer('user_id')->unsigned();
             $table->integer('comments')->default(0);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')->onDelete('cascade');
             $table->foreign('category')->references('id')
-                ->on('categories');
+                ->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }

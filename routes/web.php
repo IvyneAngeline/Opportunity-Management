@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('suspend/{id}','UserController@suspend')->name('suspend');
     Route::post('comment','CommentsController@store')->name('comment');
     Route::post('download','PostController@download')->name('download');
+    Route::post('manage','PostController@manage')->name('manage');
     Route::get('category_chart','PostController@category')->name('category_chart');
 
     Route::get('admin','UserController@admin')->name('admin');

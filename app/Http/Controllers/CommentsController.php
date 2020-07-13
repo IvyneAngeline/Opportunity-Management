@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Comments;
+use App\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,6 +48,8 @@ class CommentsController extends Controller
             'comment'=>$request->input('comment')
         ]);
         if ($create){
+            Posts::find($request->input('post_id'))->increment('comments');
+
             return redirect()->
             route('post.show',$request->
             input('post_id'))->withStatus(__('Comment shared

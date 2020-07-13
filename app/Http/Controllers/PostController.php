@@ -41,17 +41,23 @@ class PostController extends Controller
         $posts=DB::table('posts')
            ->join('users','posts.user_id',
                '=','users.id')
+
            ->select('users.name as user_name',
            'users.id as user_id','posts.title as title',
                'posts.description as description',
+               'posts.user_id as user_id',
                'posts.id as post_id',
+               'posts.id as post_id',
+               'posts.category as category',
                'posts.asset as asset',
+           'posts.views as post_views',
            'posts.created_at as created_at','posts.likes as likes',
                'posts.downloads as downloads','posts.comments as comments')
            ->orderBy('posts.created_at','desc')->get();
 
        return  view('posts.index',
-           compact('posts'))->with('users',$users)->with('views',$views)->with('post_count',$post_count);
+           compact('posts'))
+           ->with('users',$users)->with('views',$views)->with('post_count',$post_count);
     }
 
     /**
@@ -179,6 +185,11 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
+        $delete=Posts::find($id);
+        if ($delete->delete()) {
+            return redirect()->route('post.index')->withStatus(__('Post deleted
+            successfully.'));
+        }
         //
     }
 }
