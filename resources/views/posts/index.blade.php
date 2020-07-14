@@ -110,7 +110,7 @@
                                 <div class="col-7 col-md-8">
                                     <div class="numbers">
                                         <p class="card-category">Total Users</p>
-                                        <p class="card-title">{{$errors}}
+                                        <p class="card-title">{{$users}}
                                         <p>
                                     </div>
                                 </div>
@@ -308,17 +308,10 @@
                         datasets: [{
                             label: 'Performance',
                             data: Prices,
-                            borderWidth: 1
+                            borderWidth: 1,
+                            backgroundColor: ["#3e95cd", "#8e5ea2","#3cba9f","#e8c3b9","#c45850"],
                         }],
 
-                        backgroundColor: [
-                            "#DEB887",
-                            "#A9A9A9",
-                            "#DC143C",
-                            "#F4A460",
-
-
-                        ],
                     },
 
                 });

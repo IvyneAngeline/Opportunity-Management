@@ -15,7 +15,7 @@
                         <p class="card-category">Comments  Performance per month</p>
                     </div>
                     <div class="card-body ">
-                        <canvas id="canvas"></canvas>
+                        <canvas id="comments"></canvas>
                     </div>
                     <div class="card-footer ">
 
@@ -33,7 +33,7 @@
                         <p class="card-category">Posts  Performance per month</p>
                     </div>
                     <div class="card-body ">
-                        <canvas id="canvas"></canvas>
+                        <canvas id="post_chart"></canvas>
                     </div>
                     <div class="card-footer ">
 
@@ -51,7 +51,7 @@
                         <p class="card-category">Views  Performance per month</p>
                     </div>
                     <div class="card-body ">
-                        <canvas id="canvas"></canvas>
+                        <canvas id="views_chart"></canvas>
                     </div>
                     <div class="card-footer ">
 
@@ -70,4 +70,113 @@
     </div>
 
 @endsection
+@push('scripts')
+    <script>
+
+        $(document).ready(function(){
+            comments();
+            posts();
+            views_chart();
+            function comments() {
+
+                var url = "{{url('comments_stats')}}";
+                var months = new Array();
+                var total= new Array();
+                $.get(url, function(response){
+                    response.forEach(function(data){
+                        months.push(data.months);
+                        total.push(data.sums);
+                    });
+                    var ctx = document.getElementById("comments").getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+
+                            labels:months,
+
+                            datasets: [{
+                                label: 'comments',
+                                data: total,
+                                borderWidth: 2,
+                                borderColor: "#3e95cd",
+                                fill: false
+                            }],
+
+
+                        },
+
+                    });
+                });
+
+            }
+
+            function posts() {
+
+                var url = "{{url('posts_stats')}}";
+                var months = new Array();
+                var total= new Array();
+                $.get(url, function(response){
+                    response.forEach(function(data){
+                        months.push(data.months);
+                        total.push(data.sums);
+                    });
+                    var ctx = document.getElementById("post_chart").getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+
+                            labels:months,
+
+                            datasets: [{
+                                label: 'Posts',
+                                data: total,
+                                borderWidth: 2,
+                                borderColor: "#3e95cd",
+                                fill: false
+                            }],
+
+
+                        },
+
+                    });
+                });
+
+            }
+            function views_chart() {
+
+                var url = "{{url('views_stats')}}";
+                var months = new Array();
+                var total= new Array();
+                $.get(url, function(response){
+                    response.forEach(function(data){
+                        months.push(data.months);
+                        total.push(data.sums);
+                    });
+                    var ctx = document.getElementById("views_chart").getContext('2d');
+                    var myChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+
+                            labels:months,
+
+                            datasets: [{
+                                label: 'Views',
+                                data: total,
+                                borderWidth: 2,
+                                borderColor: "#3e95cd",
+                                fill: false
+                            }],
+
+
+                        },
+
+                    });
+                });
+
+            }
+
+        });
+    </script>
+@endpush
+
 

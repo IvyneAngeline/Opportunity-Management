@@ -16,19 +16,34 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-
-    public  function  views_stats(){
+    public  function  posts_stats(){
+        $posts = Posts::select(
+            DB::raw('count(*) as sums'),
+            DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
+        )
+            ->orderBY('created_at','ASC')
+            ->groupBy('months')
+            ->get();
+        return  response()->json($posts);
 
     }
 
-    public  function  stats(){
-        $comments = DB::table('comments')
-            ->select('comments.created_at as comment_days'
-                , DB::raw('COUNT(*) AS total'))
-            ->groupBy('comments.created_at')
+    public  function  views_stats(){
+        $posts = Posts::select(
+            DB::raw('sum(views) as sums'),
+            DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
+        )
+            ->orderBY('created_at','ASC')
+            ->groupBy('months')
             ->get();
+        return  response()->json($posts);
 
-        return  view('posts.stats')->with('comments',$comments);
+    }
+
+
+    public  function  stats(){
+
+        return  view('posts.stats');
     }
     public  function  category(){
 
@@ -70,7 +85,8 @@ class PostController extends Controller
 
        return  view('posts.index',
            compact('posts'))
-           ->with('users',$users)->with('views',$views)->with('post_count',$post_count);
+           ->with('users',$users)
+           ->with('views',$views)->with('post_count',$post_count);
     }
 
     /**

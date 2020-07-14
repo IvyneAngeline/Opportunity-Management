@@ -29,6 +29,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('download','PostController@download')->name('download');
     Route::get('stats','PostController@stats')->name('stats');
     Route::get('category_chart','PostController@category')->name('category_chart');
+    Route::get('comments_stats','CommentsController@comments_stats')->name('comments_stats');
+    Route::get('posts_stats','PostController@posts_stats')->name('posts_stats');
+    Route::get('views_stats','PostController@views_stats')->name('views_stats');
+
+
 
     Route::get('admin','UserController@admin')->name('admin');
     Route::resource('user', 'UserController', ['except' => ['show']]);

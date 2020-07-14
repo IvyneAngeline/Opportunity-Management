@@ -4,11 +4,25 @@ namespace App\Http\Controllers;
 
 use App\Comments;
 use App\Posts;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CommentsController extends Controller
 {
+
+    public  function  comments_stats(){
+        $comments = Comments::select(
+            DB::raw('count(*) as sums'),
+            DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
+        )
+            ->orderBY('created_at','ASC')
+            ->groupBy('months')
+            ->get();
+        return  response()->json($comments);
+
+    }
     /**
      * Display a listing of the resource.
      *
