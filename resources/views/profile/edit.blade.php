@@ -17,26 +17,18 @@
         @endif
         <div class="row">
             <div class="col-md-4">
-                <div class="card card-user">
-                    <div class="image">
-                        <img src="{{ asset('paper/img/damir-bosnjak.jpg') }}" alt="...">
-                    </div>
+                <div class="card">
+
                     <div class="card-body">
                         <div class="author">
                             <a href="#">
-                                <img class="avatar border-gray" src="{{ asset('paper/img/mike.jpg') }}" alt="...">
-
                                 <h5 class="title">{{ __(auth()->user()->name)}}</h5>
                             </a>
                             <p class="description">
                             @ {{ __(auth()->user()->name)}}
                             </p>
                         </div>
-                        <p class="description text-center">
-                            {{ __('I like the way you work it') }}
-                            <br> {{ __('No diggity') }}
-                            <br> {{ __('I wanna bag it up') }}
-                        </p>
+
                     </div>
                     <div class="card-footer">
                         <hr>
@@ -45,21 +37,16 @@
                                 <div class="col-lg-3 col-md-6 col-6 ml-auto">
                                     <h5>{{ __('12') }}
                                         <br>
-                                        <small>{{ __('Files') }}</small>
+                                        <small>{{ __('Posts') }}</small>
                                     </h5>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-6 ml-auto mr-auto">
                                     <h5>{{ __('2GB') }}
                                         <br>
-                                        <small>{{ __('Used') }}</small>
+                                        <small>{{ __('Views') }}</small>
                                     </h5>
                                 </div>
-                                <div class="col-lg-3 mr-auto">
-                                    <h5>{{ __('24,6$') }}
-                                        <br>
-                                        <small>{{ __('Spent') }}</small>
-                                    </h5>
-                                </div>
+
                             </div>
                         </div>
                     </div>

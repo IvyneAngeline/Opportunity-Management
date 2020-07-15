@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileRequest;
 use App\Http\Requests\PasswordRequest;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -27,8 +28,9 @@ class ProfileController extends Controller
     public function update(ProfileRequest $request)
     {
         auth()->user()->update($request->all());
+        Toastr::success('Profile updated successfully','Success',['options']);
 
-        return back()->withStatus(__('Profile successfully updated.'));
+        return back();
     }
 
     /**

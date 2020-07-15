@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\View;
 use  Brian2694\Toastr\Facades\Toastr;
 use App\Category;
 use App\Posts;
@@ -181,6 +182,7 @@ class PostController extends Controller
      */
     public function show($id)
     {
+
         $comments=DB::table('comments')
             ->join('users','comments.user_id','users.id')
         ->select('comments.id as comment_id','comments.post_id as comment_post_id'
@@ -199,6 +201,12 @@ class PostController extends Controller
                 'posts.created_at as created_at','posts.likes as likes',
                 'posts.downloads as downloads','posts.comments as comments')
             ->where('posts.id','=',$id)->first();
+        $category=Posts::find($id)->category;
+        View::create([
+           'user_id'=>Auth::id(),
+           'post_id'=>$id,
+            'category'=>$category
+        ]);
 
         return view('posts.show',compact('post'),compact('comments'));
     }
