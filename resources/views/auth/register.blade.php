@@ -13,18 +13,18 @@
                             <i class="nc-icon nc-tv-2"></i>
                         </div>
                         <div class="description">
-                            <h5 class="info-title">{{ __('Marketing') }}</h5>
+                            <h5 class="info-title">{{ __('Digital Marketing') }}</h5>
                             <p class="description">
-                                {{ __('We\'ve created the marketing campaign of the website. It was a very interesting collaboration.') }}
+                                {{ __('Digital marketing encompasses all marketing efforts that use an electronic device or the internet.') }}
                             </p>
                         </div>
                     </div>
                     <div class="info-area info-horizontal">
                         <div class="icon icon-primary">
-                            <i class="nc-icon nc-html5"></i>
+                            <i class="nc-icon nc-sound-wave"></i>
                         </div>
                         <div class="description">
-                            <h5 class="info-title">{{ __('Fully Coded in HTML5') }}</h5>
+                            <h5 class="info-title">{{ __('World Data Statistics') }}</h5>
                             <p class="description">
                                 {{ __('We\'ve developed the website with HTML5 and CSS3. The client has access to the code using GitHub.') }}
                             </p>

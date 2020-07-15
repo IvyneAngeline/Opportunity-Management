@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use  Brian2694\Toastr\Facades\Toastr;
 use App\Category;
-use App\Comments;
 use App\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -134,8 +133,20 @@ class PostController extends Controller
                 'user_id'=>Auth::id(),
                 'category'=>$request->input('category')
             ]);
-            return redirect()->route('post.index')->withStatus(__('Post Created
-            successfully.'));
+
+            if($post){
+                Toastr::success('Post Created successfully', 'title', ['options']);
+                return redirect()->route('post.index');
+
+            }
+            else{
+                Toastr::error('An error occurred please try again',
+                    'title', ['options']);
+                return redirect()->route('post.index');
+            }
+
+
+
 
 
         }
@@ -147,9 +158,18 @@ class PostController extends Controller
                 'category'=>$request->input('category')
 
             ]);
+            if($post){
+                Toastr::success('Post Created successfully',
+                    'Success', ['options']);
+                return redirect()->route('post.index');
 
-            return redirect()->route('post.index')->withStatus(__('Post Created
-            successfully.'));
+            }
+            else{
+                Toastr::error('An error occurred please try again',
+                    'An error occured', ['options']);
+                return redirect()->route('post.index');
+            }
+
         }
     }
 
@@ -216,8 +236,8 @@ class PostController extends Controller
     {
         $delete=Posts::find($id);
         if ($delete->delete()) {
-            return redirect()->route('post.index')->withStatus(__('Post deleted
-            successfully.'));
+            Toastr::success('Post deleted successfully','Success',['options']);
+            return redirect()->route('post.index');
         }
         //
     }

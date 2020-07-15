@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Comments;
 use App\Posts;
+use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -63,13 +64,13 @@ class CommentsController extends Controller
         ]);
         if ($create){
             Posts::find($request->input('post_id'))->increment('comments');
-
+            Toastr::success('Comment sent','Success',['options']);
             return redirect()->
             route('post.show',$request->
-            input('post_id'))->withStatus(__('Comment shared
-            successfully.'));
+            input('post_id'));
         }
         else{
+            Toastr::error('Comment not sent','error',['options']);
 
         }
     }

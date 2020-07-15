@@ -16,31 +16,8 @@
         @endif
     </div>
     <div class="row">
-        <div class="col-lg-3 col-md-6 col-sm-6">
-            <div class="card card-stats">
-                <div class="card-body ">
-                    <div class="row">
 
-                        <div class="col-7 col-md-8">
-                            <div class="numbers">
-                                <p class="card-category">
-                                    {{$category->name}}
-                                </p>
-                                <p class="card-title">.
-                                <p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-footer ">
-                    <hr>
-                    <div class="stats">
-                        <i class=""></i>  {{$category->name}}
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-body ">
                     <div class="row">
@@ -66,7 +43,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-body ">
                     <div class="row">
@@ -92,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3 col-md-6 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card card-stats">
                 <div class="card-body ">
                     <div class="row">

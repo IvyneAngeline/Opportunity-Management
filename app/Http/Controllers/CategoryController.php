@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\Posts;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -49,11 +50,13 @@ class CategoryController extends Controller
 
         if ($create){
 
-            return redirect()->route('category.index')->withStatus(__('Category Created
-            successfully.'));
+            Toastr::success('Category created successfull','Success',['options']);
+
+            return redirect()->route('category.index');
 
         }
         else{
+            Toastr::error('An error occured','Error',['options']);
 
             return redirect()->route('category.index')
                 ->withStatus(__('An error occurred.'));
@@ -112,9 +115,8 @@ class CategoryController extends Controller
         $update->name=$request->input('category');
 
         $update->save();
-
-        return redirect()->route('category.show',$id)->withStatus(__('Category Updated
-            successfully.'));
+        Toastr::success('Category updated successfully','Success',['options']);
+        return redirect()->route('category.show',$id);
 
     }
 
