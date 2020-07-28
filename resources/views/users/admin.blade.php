@@ -82,6 +82,16 @@
                                                                 </button>
                                                             </form>
                                                         @endif
+                                                            <form action="{{ route('suspend_Admin', [$user->id])}}" method="post">
+                                                                @csrf
+                                                                <button type="button"
+                                                                        class="dropdown-item"
+                                                                        onclick=
+                                                                        "confirm
+                                                                            ('{{ __("Are you sure you want to remove user as admin?") }}') ? this.parentElement.submit() : ''">
+                                                                    {{ __('Remove Admin') }}
+                                                                </button>
+                                                            </form>
                                                         <form action="{{ route('user.destroy', $user) }}" method="post">
                                                             @csrf
                                                             @method('delete')

@@ -60,6 +60,16 @@
                                                         @if ($user->id != auth()->id())
 
                                                             @if($user->status=='active')
+                                                                <form action="{{ route('make_admin', [$user->id])}}" method="post">
+                                                                    @csrf
+                                                                    <button type="button"
+                                                                            class="dropdown-item"
+                                                                            onclick=
+                                                                            "confirm
+                                                                                ('{{ __("Are you sure you want to make user admin?") }}') ? this.parentElement.submit() : ''">
+                                                                        {{ __('Make Admin') }}
+                                                                    </button>
+                                                                </form>
                                                             <form action="{{ route('suspend', [$user->id]) }}" method="post">
                                                                 @csrf
                                                                 <button type="button" class="dropdown-item"

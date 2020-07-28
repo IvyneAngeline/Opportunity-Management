@@ -77,7 +77,7 @@
                                 <button
                                     class=
                                     "btn  btn-outline-info">
-                                    <a href="{{route('stats')}}">Manage</a></button>
+                                    <a href="{{route('stats')}}">Statistics</a></button>
 
                             </div>
                         </div>
@@ -249,27 +249,7 @@
 
         </div>
 
-        <div class="row">
-            <div class="col-md-7">
-                <div class="card ">
-                    <div class="card-header ">
-                        <h5 class="card-title">Posts</h5>
-                        <p class="card-category">Category  Performance</p>
-                    </div>
-                    <div class="card-body ">
-                        <canvas id="canvas"></canvas>
-                    </div>
-                    <div class="card-footer ">
 
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-calendar"></i> Number of emails sent
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
 
     </div>
 

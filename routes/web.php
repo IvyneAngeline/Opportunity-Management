@@ -25,6 +25,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['middleware' => 'auth'], function () {
     Route::post('activate/{id}','UserController@activate')->name('activate');
     Route::post('suspend/{id}','UserController@suspend')->name('suspend');
+    Route::post('make_admin/{id}','UserController@make_admin')->name('make_admin');
+    Route::post('suspend_Admin/{id}','UserController@suspend_Admin')->name('suspend_Admin');
+
     Route::post('comment','CommentsController@store')->name('comment');
     Route::post('download','PostController@download')->name('download');
     Route::get('stats','PostController@stats')->name('stats');

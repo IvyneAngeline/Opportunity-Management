@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\Http\Requests\UserRequest;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -24,6 +25,27 @@ class UserController extends Controller
     {
         $users=User::where('account_type','=','admin')->get();
         return view('users.admin', compact('users'));
+    }
+    public  function make_admin($id){
+        $user=User::find($id);
+        $user->account_type='admin';
+        $user->save();
+        Toastr::success('Admin Created successfully',
+            'Success', ['options']);
+
+        return redirect()->route('user.index');
+
+
+    }
+
+    public  function  suspend_Admin($id){
+        $user=User::find($id);
+        $user->account_type='user';
+        $user->save();
+        Toastr::success('Admin removed successfully',
+            'Success', ['options']);
+
+        return redirect()->route('user.index');
     }
 
     public  function suspend($id){

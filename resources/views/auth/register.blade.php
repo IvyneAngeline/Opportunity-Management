@@ -26,7 +26,7 @@
                         <div class="description">
                             <h5 class="info-title">{{ __('World Data Statistics') }}</h5>
                             <p class="description">
-                                {{ __('We\'ve developed the website with HTML5 and CSS3. The client has access to the code using GitHub.') }}
+                                {{ __('With this data you can be able to make major business decisions in-terms of marketing.') }}
                             </p>
                         </div>
                     </div>
@@ -37,7 +37,7 @@
                         <div class="description">
                             <h5 class="info-title">{{ __('Built Audience') }}</h5>
                             <p class="description">
-                                {{ __('There is also a Fully Customizable CMS Admin Dashboard for this product.') }}
+                                {{ __('By sharing Digital Marketing resources you get to target a huge audience.') }}
                             </p>
                         </div>
                     </div>

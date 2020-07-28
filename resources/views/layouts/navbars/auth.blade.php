@@ -2,11 +2,11 @@
     <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text logo-mini">
             <div class="logo-image-small">
-                <img src="{{ asset('paper') }}/img/logo-small.png">
+                <img src="https://i.pinimg.com/originals/9f/92/9f/9f929f6023c10f6311ecc7273f710557.png">
             </div>
         </a>
         <a href="http://www.creative-tim.com" class="simple-text logo-normal">
-            {{ __('D-system') }}
+            {{ __('DM-System') }}
         </a>
     </div>
     <div class="sidebar-wrapper">
@@ -29,7 +29,7 @@
             <li class="{{ $elementActive == 'admin' ? 'active' : '' }}">
                 @if(\Illuminate\Support\Facades\Auth::user()->account_type=="admin")
                     <a href="{{ route('admin', 'admin') }}">
-                        <i class="nc-icon nc-circle-10"></i>
+                        <i class="nc-icon nc-briefcase-24"></i>
                         <p>{{ __('Administrators') }}</p>
                     </a>
                 @endif
@@ -44,7 +44,7 @@
             <li class="{{ $elementActive == 'category' ? 'active' : '' }}">
                 @if(\Illuminate\Support\Facades\Auth::user()->account_type=="admin")
                     <a href="{{ route('category.index', 'category') }}">
-                        <i class="nc-icon nc-circle-10"></i>
+                        <i class="nc-icon nc-bullet-list-67"></i>
                         <p>{{ __('Categories') }}</p>
                     </a>
                 @endif
