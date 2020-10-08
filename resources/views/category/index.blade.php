@@ -91,7 +91,7 @@
 
                 @foreach($categories as $category)
                     <div class="col-md-4 col-lg-4">
-                        <a href="#">
+                        <a href="{{route('category.show',$category->id)}}">
                     <div class="card card-stats">
                         <div class="card-body">
                             <h6>{{$category->name}}</h6>

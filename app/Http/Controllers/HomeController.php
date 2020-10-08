@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -27,7 +28,8 @@ class HomeController extends Controller
         return redirect()->route('post.index');
         }
         else{
-            return view('pages.dashboard');
+            $users=User::where('account_type','user')->count();
+            return view('pages.dashboard',compact('users'));
 
         }
     }
