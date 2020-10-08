@@ -116,7 +116,7 @@ class CategoryController extends Controller
 
         $update->save();
         Toastr::success('Category updated successfully','Success',['options']);
-        return redirect()->route('category.show',$id);
+        return redirect()->route('category.index');
 
     }
 

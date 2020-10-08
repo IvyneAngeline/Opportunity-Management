@@ -6,6 +6,7 @@
 @section('content')
 
     <div class="content">
+        @if(\Illuminate\Support\Facades\Auth::user()->account_type=='admin')
 
        <a href="{{route('category.create')}}" class="btn btn-primary">Create</a>
         <div class="row">
@@ -42,7 +43,7 @@
 
                 <div class="table-responsive card-body">
                     <table class="table " id="table">
-                        <thead class="text-primary">
+                        <thead class="text-dark">
                         <th scope="col">{{ __('Name') }}</th>
                         <th scope="col">{{ __('Created At') }}</th>
 
@@ -83,6 +84,31 @@
             </div>
 
         </div>
+        @else
+
+
+            <div class="row">
+
+                @foreach($categories as $category)
+                    <div class="col-md-4 col-lg-4">
+                        <a href="#">
+                    <div class="card card-stats">
+                        <div class="card-body">
+                            <h6>{{$category->name}}</h6>
+                        </div>
+                        <div class="card-footer">
+                            <hr>
+                            <div class="stats">
+                                <p> Resources available</p>
+                            </div>
+                        </div>
+                    </div></a>
+                    </div>
+                @endforeach
+
+            </div>
+
+        @endif
 
     </div>
 

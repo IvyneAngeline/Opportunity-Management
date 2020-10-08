@@ -50,6 +50,17 @@
                 @endif
             </li>
 
+            @if(\Illuminate\Support\Facades\Auth::user()->account_type=='user')
+
+                <li class="{{ $elementActive == 'category' ? 'active' : '' }}">
+                        <a href="{{ route('category.index', 'category') }}">
+                            <i class="nc-icon nc-bullet-list-67"></i>
+                            <p>{{ __('Categories') }}</p>
+                        </a>
+                </li>
+
+            @endif
+
 
         </ul>
     </div>

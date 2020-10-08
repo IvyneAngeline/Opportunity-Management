@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <label for="title">Enter category</label>
                         <input type="text" class="form-control" id="category" name="category"
-                               placeholder="Category Name" required >
+                               placeholder="Category Name" required value="{{$category->name}}">
                     </div>
 
 

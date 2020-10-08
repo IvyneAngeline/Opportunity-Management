@@ -4,6 +4,7 @@
 ])
 
 @section('content')
+    <div id="app"></div>
     <div class="content">
         <div class="container-fluid mt--7">
             <div class="row">
@@ -31,7 +32,7 @@
 
                         <div class="table-responsive card-body">
                             <table class="table " id="table">
-                                <thead class="text-primary">
+                                <thead class="text-dark">
                                         <th scope="col">{{ __('Name') }}</th>
                                         <th scope="col">{{ __('Email') }}</th>
                                         <th scope="col">{{ __('Creation Date') }}</th>
@@ -45,11 +46,14 @@
                                         <tr>
                                             <td>{{ $user->name }}</td>
                                             <td>
-                                                <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+                                                <a class="text-dark" href="mailto:{{ $user->email }}">{{ $user->email }}</a>
                                             </td>
                                             <td>{{ $user->created_at->format('d/m/Y H:i') }}</td>
-                                            <td>{{ $user->status}}</td>
-
+                                            @if($user->status=='active')
+                                                <td style="color: green;font-weight: bold">{{ $user->status}}</td>
+                                            @else
+                                                <td style="color: red;font-weight: bold">{{ $user->status}}</td>
+                                            @endif
                                             <td class="text-right">
                                                 <div class="dropdown">
                                                     <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -93,8 +97,6 @@
                                                             <form action="{{ route('user.destroy', $user) }}" method="post">
                                                                 @csrf
                                                                 @method('delete')
-
-                                                                <a class="dropdown-item" href="{{ route('user.edit', $user) }}">{{ __('Edit') }}</a>
 
                                                                 <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
                                                                     {{ __('Delete') }}

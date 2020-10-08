@@ -33,7 +33,7 @@
 
                         <div class="table-responsive card-body">
                             <table class="table " id="table">
-                                <thead class="text-primary">
+                                <thead class="text-dark">
                                 <th scope="col">{{ __('Name') }}</th>
                                 <th scope="col">{{ __('Email') }}</th>
                                 <th scope="col">{{ __('Creation Date') }}</th>
@@ -47,10 +47,14 @@
                                     <tr>
                                         <td>{{ $user->name }}</td>
                                         <td>
-                                            <a href="mailto:{{ $user->email }}">{{ $user->email }}</a>
+                                            <a class="text-dark" href="mailto:{{ $user->email }}">{{ $user->email }}</a>
                                         </td>
                                         <td>{{ $user->created_at->format('d/m/Y H:i') }}</td>
-                                        <td>{{ $user->status}}</td>
+                                        @if($user->status=='active')
+                                        <td style="color: green;font-weight: bold">{{ $user->status}}</td>
+                                        @else
+                                            <td style="color: red;font-weight: bold">{{ $user->status}}</td>
+                                        @endif
 
                                         <td class="text-right">
                                             <div class="dropdown">

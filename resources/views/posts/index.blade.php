@@ -184,7 +184,7 @@
             </div>
             <div class="table-responsive card-body">
                 <table class="table " id="table">
-                    <thead class="text-info">
+                    <thead class="text-dark">
                     <th scope="col">{{ __('Title') }}</th>
                     <th scope="col">{{ __('Description') }}</th>
                     <th scope="col">{{ __('Category') }}</th>
