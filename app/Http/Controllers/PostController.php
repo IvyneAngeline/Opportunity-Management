@@ -58,6 +58,9 @@ class PostController extends Controller
         return  response()->json($categories);
 
     }
+    public  function  reports(Request $request){
+
+    }
     public function index()
     {
         $post_count=DB::table('posts')
@@ -69,6 +72,7 @@ class PostController extends Controller
         $posts=DB::table('posts')
            ->join('users','posts.user_id',
                '=','users.id')
+            ->join('categories','posts.category','=','categories.id')
 
            ->select('users.name as user_name',
            'users.id as user_id','posts.title as title',
@@ -76,7 +80,7 @@ class PostController extends Controller
                'posts.user_id as user_id',
                'posts.id as post_id',
                'posts.id as post_id',
-               'posts.category as category',
+               'categories.name as category',
                'posts.asset as asset',
            'posts.views as post_views',
            'posts.created_at as created_at','posts.likes as likes',
