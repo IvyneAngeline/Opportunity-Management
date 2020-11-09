@@ -45,6 +45,8 @@
                                             </select>
                                         </th>
                                         <th scope="col">{{__('Actions')}}</th>
+                                        <th scope="col">{{__('Admin')}}</th>
+
 
 
                                 </thead>
@@ -116,6 +118,20 @@
                                }
                                else{
                                    return "<a class='btn btn-success' href='/activate/"+ row.id +"'>Activate</a>"
+
+                               }
+
+
+                           }
+                       },
+                       {
+
+                           render:function (data,type,row,meta) {
+                               if (row.account_type=='admin'){
+                                   return "<a class='btn btn-danger' href='/suspend_Admin/"+ row.id +"'>Revoke Admin</a>"
+                               }
+                               else{
+                                   return "<a class='btn btn-success' href='/make_admin/"+ row.id +"'>Make Admin</a>"
 
                                }
 

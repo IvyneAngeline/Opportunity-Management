@@ -66,7 +66,7 @@
                                                     @if ($user->id != auth()->id())
 
                                                         @if($user->status=='active')
-                                                            <form action="{{ route('suspend', [$user->id]) }}" method="post">
+                                                            <form action="{{ route('suspend', [$user->id]) }}" method="get">
                                                                 @csrf
                                                                 <button type="button" class="dropdown-item"
                                                                         onclick=
@@ -76,7 +76,7 @@
                                                                 </button>
                                                             </form>
                                                         @else
-                                                            <form action="{{ route('activate', [$user->id]) }}" method="post">
+                                                            <form action="{{ route('activate', [$user->id]) }}" method="get">
                                                                 @csrf
                                                                 <button type="button" class="dropdown-item"
                                                                         onclick=
@@ -86,7 +86,7 @@
                                                                 </button>
                                                             </form>
                                                         @endif
-                                                            <form action="{{ route('suspend_Admin', [$user->id])}}" method="post">
+                                                            <form action="{{ route('suspend_Admin', [$user->id])}}" method="get">
                                                                 @csrf
                                                                 <button type="button"
                                                                         class="dropdown-item"
