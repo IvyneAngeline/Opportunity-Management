@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\NewPostMail;
+use App\User;
 use App\View;
 use  Brian2694\Toastr\Facades\Toastr;
 use App\Category;
@@ -8,6 +10,7 @@ use App\Posts;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -200,6 +203,12 @@ class PostController extends Controller
             ]);
 
             if($post){
+                $title=$request->input('title');
+                $description=$request->input('description');
+                $users=User::all();
+                foreach ($users as $user){
+                    Mail::to($user->email)->send(new NewPostMail($title,$description));
+                }
                 Toastr::success('Post Created successfully', 'title', ['options']);
                 return redirect()->route('post.index');
 
