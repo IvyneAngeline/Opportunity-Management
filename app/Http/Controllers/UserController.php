@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Http\Requests\UserRequest;
 use Brian2694\Toastr\Facades\Toastr;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -16,10 +18,25 @@ class UserController extends Controller
      * @param  \App\User  $model
      * @return \Illuminate\View\View
      */
-    public function index(User $model)
+    public function index(User $model,Request  $request)
     {
-        $users=User::where('account_type','=','user')->get();
-        return view('users.index', compact('users'));
+        if ($request->ajax()){
+            if ($request->status){
+                $data=User::where('account_type','=','user')
+                    ->where('status','=',$request->status)
+                    ->get();
+            }
+            else{
+                $data=User::where('account_type','=','user')->get();
+            }
+
+            return  datatables()->of($data)->make(true);
+        }
+        $statuses=DB::table('users')
+            ->select('users.status')
+        ->groupBy('users.status')->get();
+
+        return view('users.index', compact('statuses'));
     }
     public function admin(User $model)
     {
@@ -53,17 +70,19 @@ class UserController extends Controller
         $user->status='inactive';
         $user->save();
 
-        return redirect()->route('user.index')->withStatus(__('User suspended
-         successfully.'));
+        Toastr::success('Suspended successfully',
+            'Success', ['options']);
+
+        return redirect()->route('user.index');
 
     }
     public  function activate($id){
         $user=User::find($id);
         $user->status='active';
         $user->save();
-
-        return redirect()->route('user.index')->withStatus(__('User activated
-         successfully.'));
+        Toastr::success('Activated successfully',
+            'Success', ['options']);
+        return redirect()->route('user.index');
 
     }
 

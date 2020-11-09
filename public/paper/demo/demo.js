@@ -18,7 +18,7 @@ demo = {
     image_src = $page.data('image');
 
     if (image_src !== undefined) {
-      image_container = '<div class="full-page-background" style="background-image: url(' + image_src + ') "/>';
+      image_container = '<div class="full-page-background" style="background-image: url(' + 'https://brand24.com/blog/wp-content/uploads/2017/03/54598520_ml-1140x570.jpg' + ') "/>';
       $page.append(image_container);
     }
   },

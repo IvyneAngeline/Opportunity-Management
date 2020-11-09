@@ -182,30 +182,15 @@
 
                 </div>
             </div>
-            <div class="col-md-12 col-lg-12 row" style="margin-top: 10px">
-                <div class="col-md-4">
-                <input type="text" name="form_date" id="form_date" class="form-control" placeholder="From Date"
-                 readonly>
-                </div>
-                <div class="col-md-4">
-                    <input type="text" name="to_date" id="to_date"
-                           class="form-control" placeholder="To Date"
-                           readonly>
-                </div>
-                <div class="col-md-4">
-                    <button type="button" name="filter"
-                            id="filter" class="btn btn-primary">Filter</button>
-                    <button type="button" name="refresh"
-                            id="refresh" class="btn btn-success">Refresh</button>
-                </div>
 
-            </div>
             <div class="table-responsive card-body">
                 <table class="table " id="table">
                     <thead class="text-dark">
                     <th scope="col">{{ __('Title') }}</th>
                     <th scope="col">{{ __('Description') }}</th>
-                    <th scope="col">{{ __('Category') }}</th>
+                    <th scope="col">
+                        Category
+                    </th>
                     <th scope="col">{{'Views'}}</th>
                     <th scope="col">{{__('Comments')}}</th>
                     <th scope="col">{{__('Time')}}</th>

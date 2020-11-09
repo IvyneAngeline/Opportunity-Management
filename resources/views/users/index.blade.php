@@ -31,86 +31,25 @@
                         </div>
 
                         <div class="table-responsive card-body">
-                            <table class="table " id="table">
+                            <table class="table " id="users_table">
                                 <thead class="text-dark">
                                         <th scope="col">{{ __('Name') }}</th>
                                         <th scope="col">{{ __('Email') }}</th>
                                         <th scope="col">{{ __('Creation Date') }}</th>
-                                        <th scope="col">{{'Status'}}</th>
+                                        <th scope="col">
+                                            <select id="status" name="status" class="form-control">
+                                                <option value="">Status</option>
+                                                @foreach($statuses as $status)
+                                                    <option value="{{$status->status}}">{{$status->status}}</option>
+                                                @endforeach
+                                            </select>
+                                        </th>
                                         <th scope="col">{{__('Actions')}}</th>
 
 
                                 </thead>
                                 <tbody style="padding: 20px">
-                                    @foreach ($users as $user)
-                                        <tr>
-                                            <td>{{ $user->name }}</td>
-                                            <td>
-                                                <a class="text-dark" href="mailto:{{ $user->email }}">{{ $user->email }}</a>
-                                            </td>
-                                            <td>{{ $user->created_at->format('d/m/Y H:i') }}</td>
-                                            @if($user->status=='active')
-                                                <td style="color: green;font-weight: bold">{{ $user->status}}</td>
-                                            @else
-                                                <td style="color: red;font-weight: bold">{{ $user->status}}</td>
-                                            @endif
-                                            <td class="text-right">
-                                                <div class="dropdown">
-                                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                        <i class="nc-align-left-2 nc-icon"></i>
-                                                    </a>
-                                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
 
-                                                        @if ($user->id != auth()->id())
-
-                                                            @if($user->status=='active')
-                                                                <form action="{{ route('make_admin', [$user->id])}}" method="post">
-                                                                    @csrf
-                                                                    <button type="button"
-                                                                            class="dropdown-item"
-                                                                            onclick=
-                                                                            "confirm
-                                                                                ('{{ __("Are you sure you want to make user admin?") }}') ? this.parentElement.submit() : ''">
-                                                                        {{ __('Make Admin') }}
-                                                                    </button>
-                                                                </form>
-                                                            <form action="{{ route('suspend', [$user->id]) }}" method="post">
-                                                                @csrf
-                                                                <button type="button" class="dropdown-item"
-                                                                        onclick=
-                                                                        "confirm('{{ __("Are you sure you want to suspend this user?") }}')
-                                                                            ? this.parentElement.submit() : ''">
-                                                                    {{ __('Suspend') }}
-                                                                </button>
-                                                            </form>
-                                                            @else
-                                                                <form action="{{ route('activate', [$user->id]) }}" method="post">
-                                                                    @csrf
-                                                                    <button type="button" class="dropdown-item"
-                                                                            onclick=
-                                                                            "confirm('{{ __("Are you sure you want to activate this user?") }}')
-                                                                                ? this.parentElement.submit() : ''">
-                                                                        {{ __('Activate') }}
-                                                                    </button>
-                                                                </form>
-                                                            @endif
-                                                            <form action="{{ route('user.destroy', $user) }}" method="post">
-                                                                @csrf
-                                                                @method('delete')
-
-                                                                <button type="button" class="dropdown-item" onclick="confirm('{{ __("Are you sure you want to delete this user?") }}') ? this.parentElement.submit() : ''">
-                                                                    {{ __('Delete') }}
-                                                                </button>
-                                                            </form>
-                                                        @else
-                                                            <a class="dropdown-item" href="{{ route('profile.edit') }}">{{ __('Edit') }}</a>
-
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -121,3 +60,73 @@
         </div>
     </div>
 @endsection
+@push('scripts')
+    <script>
+        $(document).ready(function () {
+            $('#status').change(function () {
+            var status=$('#status').val();
+            $('#users_table').DataTable().destroy();
+
+            fetchData(status);
+
+            });
+            fetchData();
+
+           function fetchData(status='') {
+               $('#users_table').DataTable({
+                   processing:true,
+                   serverSide:true,
+                   searchable:true,
+                   ajax:{
+                       url:"{{route('user.index')}}",
+                       data:{status:status}
+                   },
+                   columns:[
+                       {
+                           name:'name',
+                           data:'name',
+                       },
+                       {
+                           name:'email',
+                           data:'email'
+                       },
+                       {
+                           name:'created_at',
+                           data:'created_at'
+                       },
+                       {
+                           name:'status',
+                           data:'status',
+                           orderable:false,
+                           render:function (data){
+                               if (data==='active'){
+                                   return "<p class='text-success' style='font-weight: bolder'>active</p>"
+                               }
+                               else{
+                                   return "<p class='text-danger' style='font-weight: bolder'>inactive</p>"
+
+                               }
+                           }
+                       },
+                       {
+
+                           render:function (data,type,row,meta) {
+                               if (row.status=='active'){
+                                   return "<a class='btn btn-danger' href='/suspend/"+ row.id +"'>Suspend</a>"
+                               }
+                               else{
+                                   return "<a class='btn btn-success' href='/activate/"+ row.id +"'>Activate</a>"
+
+                               }
+
+
+                           }
+                       }
+                   ]
+               })
+           }
+
+
+        })
+    </script>
+@endpush

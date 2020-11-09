@@ -23,9 +23,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::post('activate/{id}','UserController@activate')->name('activate');
-    Route::post('suspend/{id}','UserController@suspend')->name('suspend');
-    Route::post('make_admin/{id}','UserController@make_admin')->name('make_admin');
+    Route::get('activate/{id}','UserController@activate')->name('activate');
+    Route::get('suspend/{id}','UserController@suspend')->name('suspend');
+    Route::get('make_admin/{id}','UserController@make_admin')->name('make_admin');
     Route::post('suspend_Admin/{id}','UserController@suspend_Admin')->name('suspend_Admin');
 
     Route::post('comment','CommentsController@store')->name('comment');
@@ -35,7 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('comments_stats','CommentsController@comments_stats')->name('comments_stats');
     Route::get('posts_stats','PostController@posts_stats')->name('posts_stats');
     Route::get('views_stats','PostController@views_stats')->name('views_stats');
-
+    Route::get('post_report','PostController@reports')->name('post_report');
 
 
     Route::get('admin','UserController@admin')->name('admin');

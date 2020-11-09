@@ -12,7 +12,7 @@
     <div class="sidebar-wrapper">
         <ul class="nav">
             <li class="{{ $elementActive == 'dashboard' ? 'active' : '' }}">
-                <a href="{{ route('page.index', 'dashboard') }}">
+                <a href="{{ route('home', 'dashboard') }}">
                     <i class="nc-icon nc-bank"></i>
                     <p>{{ __('Dashboard') }}</p>
                 </a>
@@ -34,13 +34,22 @@
                     </a>
                 @endif
             </li>
-
-            <li class="{{ $elementActive == 'posts' ? 'active' : '' }}">
-                <a href="{{ route('post.index', 'posts') }}">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#"
+                   id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
                     <i class="nc-icon nc-paper"></i>
                     <p>{{ __('Resources') }}</p>
                 </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" style="margin-left: 50px">
+                    <a class="dropdown-item" href="{{ route('post.index', 'posts') }}">View Resources</a>
+                    @if(\Illuminate\Support\Facades\Auth::user()->account_type=="admin")
+                    <a class="dropdown-item" href="{{route('post_report')}}">Reports</a>
+                    @endif
+
+                </div>
             </li>
+
             <li class="{{ $elementActive == 'category' ? 'active' : '' }}">
                 @if(\Illuminate\Support\Facades\Auth::user()->account_type=="admin")
                     <a href="{{ route('category.index', 'category') }}">

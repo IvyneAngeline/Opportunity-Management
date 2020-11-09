@@ -19,7 +19,7 @@
                                 <div class="numbers">
                                     <p class="card-category">Users</p>
                                     <p class="card-title">{{$users}}
-                                        <p>
+                                    <p>
                                 </div>
                             </div>
                         </div>
@@ -44,8 +44,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Administrators</p>
-                                    <p class="card-title">1,345
-                                        <p>
+                                    <p class="card-title">{{$admin}}
+                                    <p>
                                 </div>
                             </div>
                         </div>
@@ -70,8 +70,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Resources</p>
-                                    <p class="card-title">23
-                                        <p>
+                                    <p class="card-title">{{$posts}}
+                                    <p>
                                 </div>
                             </div>
                         </div>
@@ -96,8 +96,8 @@
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
                                     <p class="card-category">Categories</p>
-                                    <p class="card-title">+45K
-                                        <p>
+                                    <p class="card-title">{{$categories}}
+                                    <p>
                                 </div>
                             </div>
                         </div>
