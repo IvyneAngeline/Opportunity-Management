@@ -90,9 +90,28 @@ class PostController extends Controller
             else if ($request->start){
                 $start = Carbon::parse($request->start);
                 $end = Carbon::parse($request->end);
+                $data=DB::table('posts')
+                    ->join('categories','posts.category','categories.id')
+                    ->join('users','posts.user_id','users.id')
+                    ->select('users.name as user_name',
+                        'users.id as user_id','posts.title as title',
+                        'posts.description as description',
+                        'posts.user_id as user_id',
+                        'posts.id as post_id',
+                        'posts.comments',
+                        'posts.views',
+                        'posts.created_at as time',
+                        'posts.id as post_id',
+                        'categories.name as category',
+                        'posts.asset as asset',
+                        'posts.views as post_views',
+                        'posts.created_at as created_at','posts.likes as likes',
+                        'posts.downloads as downloads','posts.comments as comments')
+                    ->whereDate('created_at','>=',$start)
+                    ->whereDate('created_at','<=',$end)
+                    ->get();
 
-                $data=Posts::whereDate('created_at','<=',$end->format('m-d-y'))
-                    ->whereDate('created_at','>=',$start->format('m-d-y'))->get();
+
 
             }
             else{
@@ -292,7 +311,10 @@ class PostController extends Controller
      */
     public function edit($id)
     {
-        //
+        $categories=Category::all();
+        $post=Posts::find($id);
+
+        return  view('posts.edit',compact('post'),compact('categories'));
     }
 
     /**
@@ -304,6 +326,18 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $title=$request->input('title');
+        $description=$request->input('description');
+        $category=$request->input('category');
+        $post=Posts::find($id);
+        $post->category=$category;
+        $post->title=$title;
+        $post->description=$description;
+        $post->save();
+        Toastr::success('Post updated successfully','Success',['options']);
+        return redirect()->route('post.index');
+
+
         //
     }
 

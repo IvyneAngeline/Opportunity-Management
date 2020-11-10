@@ -43,19 +43,17 @@
 
                         {{$post->likes}}
                     </div>
-                    @if($post->asset !=null)
-                    <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
-                        <i class="nc-icon nc-cloud-download-93"></i>
 
-                        {{$post->downloads}}
-                    </div>
-
-                    @endif
                     <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
                         <i class="nc-icon nc-chat-33"></i>
 
                         {{$post->comments}}
                     </div>
+                    @if($post->user_id==Illuminate\Support\Facades\Auth::id())
+                        <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
+                            <a href="{{route('post.edit',$post->post_id)}}" class="btn btn-warning">Edit</a>
+                        </div>
+                    @endif
 
 
                 </div>
