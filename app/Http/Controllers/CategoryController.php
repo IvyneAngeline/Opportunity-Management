@@ -15,6 +15,19 @@ class CategoryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public  function  analysis(){
+        $stats = DB::table('posts')
+            ->join('categories', 'categories.id',
+                '=', 'posts.category')
+            ->select('categories.name',DB::raw('DATE(posts.created_at) as date'), DB::raw('COUNT(*) AS total'))
+            ->groupBy('categories.name','date')
+            ->orderBy('date', 'ASC')
+            ->get();
+        ;
+
+        return  response()->json($stats);
+    }
     public function index()
     {
         $categories=Category::all();

@@ -252,6 +252,12 @@ class PostController extends Controller
 
             ]);
             if($post){
+                $title=$request->input('title');
+                $description=$request->input('description');
+                $users=User::all();
+                foreach ($users as $user){
+                    Mail::to($user->email)->send(new NewPostMail($title,$description));
+                }
                 Toastr::success('Post Created successfully',
                     'Success', ['options']);
                 return redirect()->route('post.index');

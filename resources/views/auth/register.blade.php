@@ -49,11 +49,8 @@
                             <form class="form" method="POST" action="{{ route('register') }}">
                                 @csrf
                                 <div class="form-group">
-                                    <label for="region">Select Region</label>
                                     <select required class="form-control" id="region" name="region">
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-
+                                        <option value="1">User</option>
                                     </select>
                                 </div>
                                 <div class="input-group{{ $errors->has('name') ? ' has-danger' : '' }}">

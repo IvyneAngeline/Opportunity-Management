@@ -24,6 +24,18 @@ class CommentsController extends Controller
         return  response()->json($comments);
 
     }
+    public  function  post_comments_stats($id){
+        $comments = Comments::select(
+            DB::raw('count(*) as sums'),
+            DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
+        )
+            ->orderBY('created_at','ASC')
+            ->groupBy('months')
+            ->where('post_id','=',$id)
+            ->get();
+        return  response()->json($comments);
+
+    }
     /**
      * Display a listing of the resource.
      *

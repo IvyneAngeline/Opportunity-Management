@@ -33,9 +33,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('stats','PostController@stats')->name('stats');
     Route::get('category_chart','PostController@category')->name('category_chart');
     Route::get('comments_stats','CommentsController@comments_stats')->name('comments_stats');
+    Route::get('post_comments_stats/{id}','CommentsController@post_comments_stats')->name('post_comments_stats');
     Route::get('posts_stats','PostController@posts_stats')->name('posts_stats');
     Route::get('views_stats','PostController@views_stats')->name('views_stats');
+    Route::get('user_stats','UserController@user_stats')->name('user_stats');
+    Route::get('user_status_stats','UserController@user_status_stats')->name('user_status_stats');
     Route::get('post_report','PostController@reports')->name('post_report');
+    Route::get('analysis','CategoryController@analysis')->name('analysis');
 
 
     Route::get('admin','UserController@admin')->name('admin');

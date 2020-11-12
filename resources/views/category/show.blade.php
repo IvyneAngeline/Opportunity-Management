@@ -127,9 +127,9 @@
                             {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}
                         </div>
                         <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
-                            <i class="nc-icon nc-favourite-28"></i>
+                            <i class="nc-icon nc-tap-01"></i>
 
-                            {{$post->likes}}
+                            {{$post->views}}
                         </div>
                         @if($post->asset !=null)
                             <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">

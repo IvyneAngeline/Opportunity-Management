@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Posts;
 use App\User;
 use App\Http\Requests\UserRequest;
 use Brian2694\Toastr\Facades\Toastr;
@@ -36,12 +37,37 @@ class UserController extends Controller
             ->select('users.status')
         ->groupBy('users.status')->get();
 
+
+
         return view('users.index', compact('statuses'));
     }
     public function admin(User $model)
     {
         $users=User::where('account_type','=','admin')->get();
         return view('users.admin', compact('users'));
+    }
+
+    public  function  user_stats(){
+        $posts = User::select(
+            DB::raw('count(created_at) as sums'),
+            DB::raw("DATE_FORMAT(created_at,'%M %Y') as months")
+        )
+            ->orderBY('created_at','ASC')
+            ->groupBy('months')
+            ->get();
+        return  response()->json($posts);
+
+    }
+    public  function  user_status_stats(){
+        $posts = User::select(
+            DB::raw('count(status) as sums'),
+            DB::raw("status as months")
+        )
+            ->orderBY('created_at','ASC')
+            ->groupBy('months')
+            ->get();
+        return  response()->json($posts);
+
     }
     public  function make_admin($id){
         $user=User::find($id);

@@ -11,7 +11,8 @@
        <a href="{{route('category.create')}}" class="btn btn-primary">Create</a>
         <div class="row">
             <div class="col-md-5">
-                <div class="card ">
+            <div>
+                <div class="card " id="cat_analysis">
                     <div class="card-header ">
                         <h5 class="card-title">Category Performance</h5>
                         <p class="card-category">Category  Performance</p>
@@ -28,6 +29,9 @@
                         </div>
                     </div>
                 </div>
+                <div>
+                </div>
+            </div>
             </div>
             <div class="card col-lg-7">
                 <div class="card-header border-0">
@@ -123,6 +127,8 @@
         var Labels = new Array();
         var Prices = new Array();
         $(document).ready(function(){
+
+
             $.get(url, function(response){
                 response.forEach(function(data){
                     Years.push(data.name);

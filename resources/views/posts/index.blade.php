@@ -39,9 +39,9 @@
                         {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}
                     </div>
                     <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
-                        <i class="nc-icon nc-favourite-28"></i>
+                        <i class="nc-icon nc-tap-01"></i>
 
-                        {{$post->likes}}
+                        {{$post->post_views}}
                     </div>
 
                     <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
@@ -50,10 +50,26 @@
                         {{$post->comments}}
                     </div>
                     @if($post->user_id==Illuminate\Support\Facades\Auth::id())
+                        <div class="row">
                         <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
                             <a href="{{route('post.edit',$post->post_id)}}" class="btn btn-warning">Edit</a>
                         </div>
+                        <div style="margin: 20px"  class="col-md-3 col-sm-2 col-lg-3">
+                            <form action="{{ route('post.destroy', $post->post_id) }}" method="post">
+                                @csrf
+                                @method('delete')
+
+
+                                <button type="button" class="btn btn-danger"
+                                        onclick=
+                                        "confirm('{{ __("Are you sure you want to delete this post?") }}') ? this.parentElement.submit() : ''">
+                                    {{ __('Delete') }}
+                                </button>
+                            </form>
+                        </div>
+                        </div>
                     @endif
+
 
 
                 </div>
@@ -65,6 +81,8 @@
 </div>
 @else
     <div class="content">
+        <a href="{{route('post.create')}}" class="btn btn-primary">Create</a>
+
         <div class="row">
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="card card-stats">
