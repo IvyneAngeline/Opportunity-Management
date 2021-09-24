@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Regions extends Model
+class Opportunity extends Model
 {
     //
 }
