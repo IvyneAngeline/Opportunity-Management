@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'category'
+    'elementActive' => 'account'
 ])
 
 @section('content')
@@ -13,7 +13,7 @@
                 <h6>Edit Category</h6>
             </div>
             <div class="card-body">
-                <form method="post" action="{{route('category.update',$category->id)}}">
+                <form method="post" action="{{route('account.update',$category->id)}}">
                     @csrf
                     @method('put')
 

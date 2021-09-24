@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'posts'
+    'elementActive' => 'opportunity'
 ])
 
 @section('content')
@@ -11,9 +11,9 @@
     <div class="content">
 
 
-   <a href="{{route('post.create')}}" class="btn btn-primary">Create</a>
+    <a href="{{route('opportunity.create')}}" class="btn btn-primary">Create Opportunity</a>
     <div class="posting">
-        @foreach($posts as $post)
+        @foreach($opportunities as $opportunity)
 
             <div class="card">
                 <div class="card-header row col-lg-10" style="padding-left: 30px">
@@ -21,54 +21,28 @@
                     -webkit-border-radius: 60px;width: 50px;height: 50px;
                      border-radius: 50px;background-color: lightgrey"></div>
                      <span style="width: 20px"></span>
-                    <p class="card-title" style="text-align: center">{{$post->user_name}}</p>
+                    <p class="card-title" style="text-align: center">{{$opportunity->account_name}}</p>
 
                 </div>
                 <div class="card-body" style="padding: 20px">
-                    <h6 class="card-title" style="font-weight: bold;color: black" >{{$post->title}}</h6>
-                    <p class="card-text">
-                        {{\Illuminate\Support\Str::limit($post->description,200,$end=' ...')}}
-                        <span><a href="{{route('post.show',$post->post_id)}}">Read More</a></span></p>
-                    @if($post->asset !=null)
-                        <a  href="images/{{$post->asset}}">Download Attachment</a>
-                    @endif
+                    <h6 class="card-title" style="font-weight: bold;color: black" >{{$opportunity->name}}</h6>
+                    <p class="card-text">Amount  :
+                        {{\Illuminate\Support\Str::limit($opportunity->amount,200,$end=' ...')}}
+                        <span></span></p>
+
 
                 </div>
                 <div class="card-footer row col-lg-12" style="padding-left: 20px">
                     <div style="padding: 20px;" class="col-md-3 col-sm-2 col-lg-3" >
-                        {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}
-                    </div>
-                    <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
-                        <i class="nc-icon nc-tap-01"></i>
-
-                        {{$post->post_views}}
+                        {{\Carbon\Carbon::parse($opportunity->created_at)->diffForHumans()}}
                     </div>
 
                     <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
-                        <i class="nc-icon nc-chat-33"></i>
+                        <i class="">Location : </i>
 
-                        {{$post->comments}}
+                        {{$opportunity->address}}
                     </div>
-                    @if($post->user_id==Illuminate\Support\Facades\Auth::id())
-                        <div class="row">
-                        <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
-                            <a href="{{route('post.edit',$post->post_id)}}" class="btn btn-warning">Edit</a>
-                        </div>
-                        <div style="margin: 20px"  class="col-md-3 col-sm-2 col-lg-3">
-                            <form action="{{ route('post.destroy', $post->post_id) }}" method="post">
-                                @csrf
-                                @method('delete')
 
-
-                                <button type="button" class="btn btn-danger"
-                                        onclick=
-                                        "confirm('{{ __("Are you sure you want to delete this post?") }}') ? this.parentElement.submit() : ''">
-                                    {{ __('Delete') }}
-                                </button>
-                            </form>
-                        </div>
-                        </div>
-                    @endif
 
 
 
@@ -81,112 +55,7 @@
 </div>
 @else
     <div class="content">
-        <a href="{{route('post.create')}}" class="btn btn-primary">Create</a>
-
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-body ">
-                        <div class="row">
-
-                            <div class="col-7 col-md-8">
-                                <button
-                                    class=
-                                    "btn  btn-outline-info">
-                                    <a href="{{route('stats')}}">Statistics</a></button>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="">manage resources posted</i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5 col-md-4">
-                                <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-single-02 text-warning"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 col-md-8">
-                                <div class="numbers">
-                                    <p class="card-category">Total Users</p>
-                                    <p class="card-title">{{$users}}
-                                    <p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class=""></i>Total Users
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5 col-md-4">
-                                <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-paper text-success"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 col-md-8">
-                                <div class="numbers">
-                                    <p class="card-category">Total Posts</p>
-                                    <p class="card-title">{{$post_count}}
-                                    <p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class=""></i>Total Posts
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5 col-md-4">
-                                <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-tap-01 text-danger"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 col-md-8">
-                                <div class="numbers">
-                                    <p class="card-category">Views</p>
-                                    <p class="card-title">{{$views}}
-                                    <p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class=""></i> Total Posts Viewings
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
+        <a href="{{route('opportunity.create')}}" class="btn btn-primary">Create</a>
 
 
         <div class="card" id="resource_table">
@@ -202,62 +71,34 @@
             <div class="table-responsive card-body">
                 <table class="table " id="table">
                     <thead class="text-dark">
-                    <th scope="col">{{ __('Title') }}</th>
-                    <th scope="col">{{ __('Description') }}</th>
+                    <th scope="col">{{ __('Name') }}</th>
+                    <th scope="col">{{ __('stage') }}</th>
                     <th scope="col">
                         Category
                     </th>
-                    <th scope="col">{{'Views'}}</th>
-                    <th scope="col">{{__('Comments')}}</th>
-                    <th scope="col">{{__('Time')}}</th>
-                    <th scope="col">{{__('Actions')}}</th>
+                    <th scope="col">{{'address'}}</th>
+                    <th scope="col">{{__('Amount')}}</th>
+                    <th scope="col">{{__('Created')}}</th>
 
 
 
 
                     </thead>
                     <tbody style="padding: 20px">
-                    @foreach ($posts as $post)
+                    @foreach ($opportunities as $post)
                         <tr>
-                            <td>{{ $post->title }}</td>
+                            <td>{{ $post->name }}</td>
                             <td>
-                                {{ $post->description }}
+                                {{ $post->stage }}
                             </td>
-                            <td>{{ $post->category}}</td>
-                            <td>{{ $post->post_views}}</td>
-                            <td>{{ $post->comments}}</td>
+                            <td>{{ $post->address}}</td>
+                            <td>{{ $post->amount}}</td>
 
 
 
                             <td>{{ $post->created_at}}</td>
 
-                            <td class="text-right">
-                                <div class="dropdown">
-                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <i class="nc-align-left-2 nc-icon"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                        <a class="dropdown-item"
-                                           href="{{ route('post.show',$post->post_id) }}">{{ __('View') }}</a>
-                                           @if(\Illuminate\Support\Facades\Auth::id()==$post->user_id)
-                                            <a class="dropdown-item"
-                                               href="{{ route('post.edit',$post->post_id) }}">{{ __('Edit') }}</a>
-                                           @endif
-                                        <form action="{{ route('post.destroy', $post->post_id) }}" method="post">
-                                            @csrf
-                                            @method('delete')
 
-
-                                            <button type="button" class="dropdown-item"
-                                                    onclick=
-                                                    "confirm('{{ __("Are you sure you want to delete this post?") }}') ? this.parentElement.submit() : ''">
-                                                {{ __('Delete') }}
-                                            </button>
-                                        </form>
-
-                                    </div>
-                                </div>
-                            </td>
                         </tr>
                     @endforeach
                     </tbody>

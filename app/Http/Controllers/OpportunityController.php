@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Accounts;
+use App\Opportunity;
+use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OpportunityController extends Controller
 {
@@ -13,7 +18,16 @@ class OpportunityController extends Controller
      */
     public function index()
     {
-        //
+
+        $opportunities=DB::table('opportunities')
+        ->join('accounts','accounts.id','=',
+            'opportunities.account_id')
+        ->select('opportunities.name','opportunities.created_at','opportunities.stage as stage',
+            'opportunities.amount as amount','accounts.name as account_name','accounts.address')
+        ->get();
+
+        return  view('opportunity.index')->with('opportunities',$opportunities);
+
     }
 
     /**
@@ -23,7 +37,9 @@ class OpportunityController extends Controller
      */
     public function create()
     {
-        //
+        $accounts=Accounts::all();
+        return  view('opportunity.create')
+            ->with('accounts',$accounts);
     }
 
     /**
@@ -34,7 +50,30 @@ class OpportunityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate=$request->validate([
+            'name'=>'required',
+            'amount'=>'required',
+            'stage'=>'required',
+            'account_id'=>'required'
+        ]);
+        $name=$request->input('name');
+        $amount=$request->input('amount');
+        $stage=$request->input('stage');
+        $user_id=Auth::id();
+        $account_id=$request->input('account_id');
+
+        $opportunity=Opportunity::create([
+            'name'=>$name,
+            'amount'=>$amount,
+            'stage'=>$stage,
+            'user_id'=>$user_id,
+            'account_id'=>$account_id
+        ]);
+
+        if ($opportunity){
+            Toastr::success('Opportunity Created successfully', 'title', ['options']);
+            return redirect()->route('opportunity.index');
+        }
     }
 
     /**

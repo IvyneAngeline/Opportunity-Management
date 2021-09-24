@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Accounts;
 use App\Category;
+use App\Opportunity;
 use App\Posts;
 use App\User;
 use Illuminate\Support\Facades\Auth;
@@ -28,17 +30,17 @@ class HomeController extends Controller
     {
 
         if (Auth::user()->account_type=='user'){
-        return redirect()->route('post.index');
+           return redirect()->route('account.index');
         }
         else{
-            $users=User::where('account_type','=','user')->count();
-            $admin=User::where('account_type','=','admin')->count();
-            $posts=Posts::all()->count();
-            $categories=Category::all()->count();
+            $accounts=Accounts::all()->count();
+            $opportunities=Opportunity::all()->count();
 
-            return view('home.home')->with('users',$users)->with('admin',$admin)
-                ->with('posts',$posts)->with('categories',$categories);
+
+            return view('home.home')->with('accounts',$accounts)
+                ->with('opportunities',$opportunities);
 
         }
+
     }
 }

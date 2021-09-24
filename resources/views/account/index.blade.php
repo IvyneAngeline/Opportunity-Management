@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'category'
+    'elementActive' => 'account'
 ])
 
 @section('content')
@@ -8,36 +8,14 @@
     <div class="content">
         @if(\Illuminate\Support\Facades\Auth::user()->account_type=='admin')
 
-       <a href="{{route('category.create')}}" class="btn btn-primary">Create</a>
+       <a href="{{route('account.create')}}" class="btn btn-primary">Create Account</a>
         <div class="row">
-            <div class="col-md-5">
-            <div>
-                <div class="card " id="cat_analysis">
-                    <div class="card-header ">
-                        <h5 class="card-title">Category Performance</h5>
-                        <p class="card-category">Category  Performance</p>
-                    </div>
-                    <div class="card-body ">
-                        <canvas id="canvas"></canvas>
-                    </div>
-                    <div class="card-footer ">
 
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-circle-thin"></i>
-                            Graph data of category performance
-                        </div>
-                    </div>
-                </div>
-                <div>
-                </div>
-            </div>
-            </div>
-            <div class="card col-lg-7">
+            <div class="card col-lg-12">
                 <div class="card-header border-0">
                     <div class="row align-items-center">
                         <div class="col-8">
-                            <h3 class="mb-0">{{ __('Categories') }}</h3>
+                            <h3 class="mb-0">{{ __('Accounts') }}</h3>
                         </div>
 
                     </div>
@@ -49,36 +27,21 @@
                     <table class="table " id="table">
                         <thead class="text-dark">
                         <th scope="col">{{ __('Name') }}</th>
+                        <th scope="col">{{ __('Address') }}</th>
                         <th scope="col">{{ __('Created At') }}</th>
-
-                        <th scope="col">{{__('Actions')}}</th>
 
 
                         </thead>
                         <tbody style="padding: 20px">
-                        @foreach ($categories as $category)
+                        @foreach ($accounts as $account)
                             <tr>
-                                <td>{{ $category->name }}</td>
+                                <td>{{ $account->name }}</td>
 
-                                <td>{{ $category->created_at->format('d/m/Y H:i') }}</td>
+                                <td>{{ $account->address }}</td>
 
-                                <td class="text-right">
-                                    <div class="dropdown">
-                                        <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <i class="nc-align-left-2 nc-icon"></i>
-                                        </a>
-                                        <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
-                                            <a class="dropdown-item"
-                                               href="{{ route('category.show',$category->id) }}"
-                                            >{{ __('Analysis') }}</a>
-                                            <a class="dropdown-item"
-                                               href="{{ route('category.edit',$category->id) }}"
-                                            >{{ __('Edit Category') }}</a>
+                                <td>{{ $account->created_at->format('d/m/Y H:i') }}</td>
 
 
-                                        </div>
-                                    </div>
-                                </td>
                             </tr>
                         @endforeach
                         </tbody>
@@ -90,20 +53,24 @@
         </div>
         @else
 
+            <a href="{{route('account.create')}}" class="btn btn-success">Create Account</a>
+             <div class="row">
 
-            <div class="row">
-
-                @foreach($categories as $category)
+                @foreach($accounts as $account)
                     <div class="col-md-4 col-lg-4">
-                        <a href="{{route('category.show',$category->id)}}">
+                        <a href="{{route('account.show',$account->id)}}">
                     <div class="card card-stats">
-                        <div class="card-body">
-                            <h6>{{$category->name}}</h6>
+                        <div class="card-header text-dark">
+                            <h6>{{$account->name}}</h6>
+                        </div>
+                        <div class="card-body text-dark">
+                          <h7 >Address  : {{$account->address}}</h7>
                         </div>
                         <div class="card-footer">
                             <hr>
-                            <div class="stats">
-                                <p> Resources available</p>
+                            <div class="">
+                                <a class="btn btn-success btn-sm "
+                                   href="{{route('account.show',$account->id)}}" style="color: whitesmoke">View Opportunities</a>
                             </div>
                         </div>
                     </div></a>

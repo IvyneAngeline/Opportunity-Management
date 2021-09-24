@@ -1,6 +1,6 @@
 @extends('layouts.app', [
     'class' => '',
-    'elementActive' => 'category'
+    'elementActive' => 'account'
 ])
 
 @section('content')
@@ -100,49 +100,38 @@
 
     </div>
     @else
+
         <div class="posting">
-            @foreach($posts as $post)
+            @foreach($opportunities as $opportunity)
 
                 <div class="card">
                     <div class="card-header row col-lg-10" style="padding-left: 30px">
                         <div style="-moz-border-radius: 50px;
                     -webkit-border-radius: 60px;width: 50px;height: 50px;
-                     border-radius: 50px;background-color: lightgrey"></div>
+                     border-radius: 50px;background-color: black"></div>
                         <span style="width: 20px"></span>
-                        <p class="card-title" style="text-align: center">{{$post->user_name}}</p>
+                        <p class="card-title"
+                           style="text-align: center;
+                           font-weight: bolder;font-size: 25px">{{$opportunity->account_name}}</p>
 
                     </div>
                     <div class="card-body" style="padding: 20px">
-                        <h6 class="card-title" style="font-weight: bold;color: black" >{{$post->title}}</h6>
-                        <p class="card-text">
-                            {{\Illuminate\Support\Str::limit($post->description,200,$end=' ...')}}
-                            <span><a href="{{route('post.show',$post->id)}}">Read More</a></span></p>
-                        @if($post->asset !=null)
-                            <a  href="images/{{$post->asset}}">Download Attachment</a>
-                        @endif
+                        <h6 class="card-title" style="font-weight: bold;color: black" >{{$opportunity->name}}</h6>
+                        <p class="card-text"> AMOUNT $ :
+                            {{\Illuminate\Support\Str::limit($opportunity->amount,200,$end=' ...')}}
+                            <span></span></p>
+
 
                     </div>
                     <div class="card-footer row col-lg-12" style="padding-left: 20px">
                         <div style="padding: 20px;" class="col-md-3 col-sm-2 col-lg-3" >
-                            {{\Carbon\Carbon::parse($post->created_at)->diffForHumans()}}
+                            {{\Carbon\Carbon::parse($opportunity->created_at)->diffForHumans()}}
                         </div>
+
                         <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
-                            <i class="nc-icon nc-tap-01"></i>
+                            <i class="">Location : </i>
 
-                            {{$post->views}}
-                        </div>
-                        @if($post->asset !=null)
-                            <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
-                                <i class="nc-icon nc-cloud-download-93"></i>
-
-                                {{$post->downloads}}
-                            </div>
-
-                        @endif
-                        <div style="padding: 20px"  class="col-md-3 col-sm-2 col-lg-3">
-                            <i class="nc-icon nc-chat-33"></i>
-
-                            {{$post->comments}}
+                            {{$opportunity->address}}
                         </div>
 
 

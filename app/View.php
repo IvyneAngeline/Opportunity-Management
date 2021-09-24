@@ -8,5 +8,5 @@ class View extends Model
 {
     //
 
-    protected  $fillable=['user_id','post_id','category'];
+    protected  $fillable=['user_id','post_id','account'];
 }

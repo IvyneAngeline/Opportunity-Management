@@ -6,7 +6,7 @@
 @section('content')
     <div class="content">
         <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card card-stats">
                     <div class="card-body ">
                         <div class="row">
@@ -17,8 +17,8 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Users</p>
-                                    <p class="card-title">{{$users}}
+                                    <p class="card-category">Accounts</p>
+                                    <p class="card-title">{{$accounts}}
                                     <p>
                                 </div>
                             </div>
@@ -27,12 +27,12 @@
                     <div class="card-footer ">
                         <hr>
                         <div class="stats">
-                            <i class="fa fa-refresh"></i> Total users
+                            <i class="fa fa-refresh"></i> Total Accounts
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="col-lg-6 col-md-6 col-sm-12">
                 <div class="card card-stats">
                     <div class="card-body ">
                         <div class="row">
@@ -43,8 +43,8 @@
                             </div>
                             <div class="col-7 col-md-8">
                                 <div class="numbers">
-                                    <p class="card-category">Administrators</p>
-                                    <p class="card-title">{{$admin}}
+                                    <p class="card-category">Opportunities</p>
+                                    <p class="card-title">{{$opportunities}}
                                     <p>
                                 </div>
                             </div>
@@ -53,63 +53,13 @@
                     <div class="card-footer ">
                         <hr>
                         <div class="stats">
-                            <i class="fa fa-calendar-o"></i> Total administrators
+                            <i class="fa fa-calendar-o"></i> Total Opportunities
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5 col-md-4">
-                                <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-align-left-2 text-danger"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 col-md-8">
-                                <div class="numbers">
-                                    <p class="card-category">Resources</p>
-                                    <p class="card-title">{{$posts}}
-                                    <p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-clock-o"></i> Total resources
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-3 col-md-6 col-sm-6">
-                <div class="card card-stats">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5 col-md-4">
-                                <div class="icon-big text-center icon-warning">
-                                    <i class="nc-icon nc-bullet-list-67 text-primary"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 col-md-8">
-                                <div class="numbers">
-                                    <p class="card-category">Categories</p>
-                                    <p class="card-title">{{$categories}}
-                                    <p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer ">
-                        <hr>
-                        <div class="stats">
-                            <i class="fa fa-refresh"></i> Total Categories
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
         </div>
 
     </div>

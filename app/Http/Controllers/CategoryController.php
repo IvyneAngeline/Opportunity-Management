@@ -17,10 +17,10 @@ class CategoryController extends Controller
      */
 
     public  function  analysis(){
-        $stats = DB::table('posts')
+        $stats = DB::table('opportunity')
             ->join('categories', 'categories.id',
-                '=', 'posts.category')
-            ->select('categories.name',DB::raw('DATE(posts.created_at) as date'), DB::raw('COUNT(*) AS total'))
+                '=', 'opportunity.account')
+            ->select('categories.name',DB::raw('DATE(opportunity.created_at) as date'), DB::raw('COUNT(*) AS total'))
             ->groupBy('categories.name','date')
             ->orderBy('date', 'ASC')
             ->get();
@@ -31,7 +31,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories=Category::all();
-        return  view('category.index',compact('categories'));
+        return  view('account.index',compact('categories'));
     }
 
     /**
@@ -41,7 +41,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return  view('category.create');
+        return  view('account.create');
     }
 
     /**
@@ -53,25 +53,25 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'category'=>'required'
+            'account'=>'required'
         ]);
 
         $create=Category::create([
 
-            'name'=>$request->input('category'),
+            'name'=>$request->input('account'),
         ]);
 
         if ($create){
 
             Toastr::success('Category created successfull','Success',['options']);
 
-            return redirect()->route('category.index');
+            return redirect()->route('account.index');
 
         }
         else{
             Toastr::error('An error occured','Error',['options']);
 
-            return redirect()->route('category.index')
+            return redirect()->route('account.index')
                 ->withStatus(__('An error occurred.'));
 
         }
@@ -86,16 +86,16 @@ class CategoryController extends Controller
     public function show($id)
     {
 
-        $users=DB::table('posts')->distinct()->count('user_id');
+        $users=DB::table('opportunity')->distinct()->count('user_id');
 
-        $posts=Posts::where('category','=',$id)->get();
+        $posts=Posts::where('account','=',$id)->get();
 
-        $views=Posts::where('category','=',$id)->get()->sum('views');
+        $views=Posts::where('account','=',$id)->get()->sum('views');
 
         $category=Category::find($id);
-        return  view('category.show',
+        return  view('account.show',
             compact('category'),
-            compact('users'))->with('posts',$posts)->with('views',$views);
+            compact('users'))->with('opportunity',$posts)->with('views',$views);
 
 
     }
@@ -111,7 +111,7 @@ class CategoryController extends Controller
 
         $category=Category::find($id);
 
-        return  view('category.edit',compact('category'));
+        return  view('account.edit',compact('category'));
     }
 
     /**
@@ -125,11 +125,11 @@ class CategoryController extends Controller
     {
         $update=Category::find($id);
 
-        $update->name=$request->input('category');
+        $update->name=$request->input('account');
 
         $update->save();
         Toastr::success('Category updated successfully','Success',['options']);
-        return redirect()->route('category.index');
+        return redirect()->route('account.index');
 
     }
 

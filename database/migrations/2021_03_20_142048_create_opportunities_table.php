@@ -15,6 +15,13 @@ class CreateOpportunitiesTable extends Migration
     {
         Schema::create('opportunities', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->double('amount');
+            $table->string('stage');
+            $table->integer('user_id')->unsigned();
+            $table->bigInteger('account_id')->unsigned();
+            $table->foreign('account_id')->references('id')->on('accounts');
+            $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
